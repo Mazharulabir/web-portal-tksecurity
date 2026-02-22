@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #0a0e1a;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.12);
+  border-radius: 1rem;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.1), 0 0 60px rgba(59, 130, 246, 0.05);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+}
+
+/* ═══════════════════════════════════════ */
+/* ───── LIGHT MODE OVERRIDES ───── */
+/* ═══════════════════════════════════════ */
+
+html.light-mode {
+  color-scheme: light;
+}
+
+/* Body */
+html.light-mode body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+/* Scrollbar */
+html.light-mode ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html.light-mode ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+html.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+/* Glass */
+html.light-mode .glass {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Gradient text stays vibrant in light */
+html.light-mode .gradient-text {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow */
+html.light-mode .glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.08), 0 0 60px rgba(59, 130, 246, 0.04);
+}
+
+/* Section divider */
+html.light-mode .section-divider {
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+}
+
+/* ── Navbar ── */
+html.light-mode nav.glass,
+html.light-mode nav[class*="glass"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ── Major text colors ── */
+html.light-mode .text-white {
+  color: #0f172a !important;
+}
+html.light-mode .text-slate-300 {
+  color: #475569 !important;
+}
+html.light-mode .text-slate-400 {
+  color: #64748b !important;
+}
+html.light-mode .text-slate-500 {
+  color: #94a3b8 !important;
+}
+html.light-mode .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+/* ── Placeholder text ── */
+html.light-mode .placeholder-slate-500::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ── Background overrides ── */
+/* Slate-800 variants (cards, panels) */
+html.light-mode [class*="bg-slate-800"] {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}
+html.light-mode [class*="bg-slate-700"] {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+}
+html.light-mode [class*="bg-slate-900"] {
+  background-color: rgba(248, 250, 252, 0.9) !important;
+}
+
+/* The main dark background override */
+html.light-mode [class*="bg-\\[\\#0a0e1a\\]"] {
+  background-color: #f1f5f9 !important;
+}
+
+/* ── Border overrides ── */
+html.light-mode [class*="border-white\\/"] {
+  border-color: rgba(0, 0, 0, 0.06) !important;
+}
+html.light-mode [class*="border-slate-700"] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+html.light-mode [class*="border-slate-600"] {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ── Input fields ── */
+html.light-mode input[type="text"],
+html.light-mode input[type="email"],
+html.light-mode input[type="password"],
+html.light-mode input[type="date"],
+html.light-mode input[type="tel"],
+html.light-mode textarea,
+html.light-mode select {
+  background-color: rgba(241, 245, 249, 0.8) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #1e293b !important;
+}
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ── White bg cards (Assigned Details) stay white ── */
+html.light-mode [class*="bg-white"] {
+  background-color: #ffffff !important;
+}
+
+/* ── Tables ── */
+html.light-mode table {
+  color: #1e293b;
+}
+html.light-mode th {
+  color: #64748b !important;
+}
+html.light-mode td {
+  color: #334155 !important;
+}
+html.light-mode tr:hover {
+  background-color: rgba(59, 130, 246, 0.04) !important;
+}
+
+/* ── Hover states ── */
+html.light-mode [class*="hover\\:bg-white\\/5"]:hover {
+  background-color: rgba(59, 130, 246, 0.04) !important;
+}
+
+/* ── Shadows for cards ── */
+html.light-mode [class*="shadow-"] {
+  --tw-shadow-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ── Blur background accents: make them subtler ── */
+html.light-mode [class*="bg-blue-500\\/"],
+html.light-mode [class*="bg-cyan-500\\/"],
+html.light-mode [class*="bg-indigo-500\\/"] {
+  opacity: 0.5;
+}
+
+/* ── Gradient overlays (on images) ── */
+html.light-mode [class*="from-\\[\\#0a0e1a\\]"] {
+  --tw-gradient-from: rgba(241, 245, 249, 0.7) !important;
+}
+
+/* ── Particle background: lighter ── */
+html.light-mode canvas {
+  opacity: 0.15 !important;
+}
+
+/* ── Keep colored badges/buttons readable ── */
+html.light-mode .bg-blue-500,
+html.light-mode .bg-blue-600,
+html.light-mode .bg-cyan-600,
+html.light-mode .bg-indigo-600,
+html.light-mode .bg-emerald-500,
+html.light-mode [class*="bg-gradient-to-r"],
+html.light-mode [class*="bg-gradient-to-br"] {
+  color: white;
+}
+html.light-mode .bg-blue-500 .text-slate-900,
+html.light-mode [class*="bg-blue"] span,
+html.light-mode [class*="bg-gradient"] span {
+  color: inherit !important;
+}
+
+/* Specific button text on colored buttons should stay white/dark */
+html.light-mode button[class*="bg-blue"] {
+  color: #0f172a !important;
+}
+html.light-mode button[class*="bg-blue-600"],
+html.light-mode button[class*="bg-gradient"] {
+  color: white !important;
+}
+
+/* ── Footer ── */
+html.light-mode footer {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── Status badges keep their colors ── */
+html.light-mode [class*="bg-emerald-500\/15"],
+html.light-mode [class*="bg-blue-500\/15"],
+html.light-mode [class*="bg-red-500\/15"],
+html.light-mode [class*="bg-slate-500\/15"] {
+  /* Keep badge styling */
+}
+
+/* Transition for smooth theme switch */
+html.light-mode * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
