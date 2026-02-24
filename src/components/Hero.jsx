@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { HiArrowRight, HiShieldCheck, HiClock, HiPhone } from 'react-icons/hi'
+
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { HiArrowRight, HiShieldCheck, HiClock, HiPhone } from 'react-icons/hi';
+import { useState } from 'react';
+import GetAQuoteForm from './GetAQuoteForm';
 
 export default function Hero() {
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
   return (
     <section
       id="home"
@@ -45,16 +49,22 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3">
-              <Link to="/contact">
-                <motion.span
-                  className="group flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Get a Quote
-                  <HiArrowRight className="group-hover:translate-x-1 transition-transform text-blue-400" />
-                </motion.span>
-              </Link>
+              <button
+                type="button"
+                onClick={() => setShowQuoteForm(true)}
+                className="group flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25"
+              >
+                Get a Quote
+                <HiArrowRight className="group-hover:translate-x-1 transition-transform text-blue-400" />
+              </button>
+                    {/* Modal for Get a Quote Form */}
+                    {showQuoteForm && (
+                      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                        <div className="relative">
+                          <GetAQuoteForm onClose={() => setShowQuoteForm(false)} />
+                        </div>
+                      </div>
+                    )}
               <Link to="/apply-job">
                 <motion.span
                   className="group flex items-center gap-2 px-6 py-3 rounded-full glass text-slate-300 font-semibold text-sm hover:text-white transition-all"
