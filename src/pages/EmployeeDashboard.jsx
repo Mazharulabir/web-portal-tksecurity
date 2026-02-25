@@ -9,7 +9,7 @@ import {
   HiOutlineViewGrid, HiOutlineClipboardList, HiOutlineClock,
   HiOutlineCalendar, HiOutlineDocumentText, HiOutlineExclamationCircle,
   HiOutlineBan, HiOutlineDocumentReport, HiChevronRight, HiChevronDown,
-  HiOutlinePencilAlt, HiOutlineBell
+  HiOutlinePencilAlt, HiOutlineBell, HiMenuAlt2, HiX
 } from 'react-icons/hi'
 import { collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
@@ -2033,6 +2033,7 @@ export default function EmployeeDashboard() {
   const navigate = useNavigate();
   const [activeView, setActiveView] = useState('command');
   const [reportsOpen, setReportsOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Get shift & attendance state from global context
   const { shiftState, shiftActions, attendanceRecords } = useShift();
@@ -2049,6 +2050,7 @@ export default function EmployeeDashboard() {
   // Sidebar navigation handler
   const handleSidebarSelect = (id) => {
     setActiveView(id);
+    setSidebarOpen(false);
     if (id === 'reports' || id === 'firewatch' || id === 'parkingviolation') {
       setReportsOpen(true);
     } else {
@@ -2269,16 +2271,31 @@ export default function EmployeeDashboard() {
   return (
     <>
       <div className="pt-20" />
-      <div className="relative z-10 min-h-[calc(100vh-80px)] max-w-7xl mx-auto px-6 flex">
-        {/* ── Sidebar ── */}
-        <motion.aside
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-[260px] flex-shrink-0 py-4"
+
+      {/* ── Mobile Top Bar ── */}
+      <div className="md:hidden sticky top-[72px] z-30 flex items-center justify-between px-4 py-3 bg-slate-900/95 backdrop-blur-sm border-b border-white/5">
+        <span className="text-white font-bold text-sm tracking-wide">Employee Portal</span>
+        <button
+          onClick={() => setSidebarOpen(v => !v)}
+          className="text-slate-300 hover:text-white p-1 rounded-lg transition-colors"
+          aria-label="Toggle menu"
         >
-          <div className="bg-slate-800/40 rounded-2xl border border-white/5 p-6 sticky top-24">
-            {/* User Profile */}
+          {sidebarOpen ? <HiX className="w-6 h-6" /> : <HiMenuAlt2 className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* ── Mobile Overlay ── */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* ── Mobile Sidebar (outside stacking context so z-50 beats overlay z-40) ── */}
+      {sidebarOpen && (
+        <aside className="fixed top-0 left-0 h-full z-50 w-[260px] pt-[72px] overflow-y-auto bg-slate-900">
+          <div className="bg-slate-800/60 rounded-2xl border border-white/10 p-6 m-4">
             <div className="text-center mb-6">
               <div className="w-20 h-20 rounded-2xl bg-slate-700/60 border-2 border-slate-600/50 flex items-center justify-center mx-auto mb-3 overflow-hidden">
                 {user?.photoURL ? (
@@ -2292,14 +2309,12 @@ export default function EmployeeDashboard() {
                 Authorized Personnel
               </span>
             </div>
-            {/* Nav Items (use Sidebar component) */}
             <Sidebar
               selected={activeView}
               onSelect={handleSidebarSelect}
               reportsDropdownOpen={reportsOpen}
               setReportsDropdownOpen={setReportsOpen}
             />
-            {/* Terminate Session */}
             <div className="mt-6 pt-4 border-t border-white/5">
               <button
                 onClick={handleLogout}
@@ -2309,9 +2324,46 @@ export default function EmployeeDashboard() {
               </button>
             </div>
           </div>
-        </motion.aside>
+        </aside>
+      )}
+
+      <div className="relative z-10 min-h-[calc(100vh-80px)] max-w-7xl mx-auto px-4 md:px-6 flex">
+
+        {/* ── Desktop Sidebar (always visible on md+) ── */}
+        <aside className="hidden md:block w-[260px] flex-shrink-0 py-4">
+          <div className="bg-slate-800/40 rounded-2xl border border-white/5 p-6 sticky top-24">
+            <div className="text-center mb-6">
+              <div className="w-20 h-20 rounded-2xl bg-slate-700/60 border-2 border-slate-600/50 flex items-center justify-center mx-auto mb-3 overflow-hidden">
+                {user?.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-slate-400 text-xl font-bold">{initials}</span>
+                )}
+              </div>
+              <h3 className="text-white font-bold text-base">{user?.name || 'Employee'}</h3>
+              <span className="inline-block mt-2 px-3 py-1 rounded-md bg-blue-500/15 text-blue-400 text-[10px] font-bold uppercase tracking-[0.15em]">
+                Authorized Personnel
+              </span>
+            </div>
+            <Sidebar
+              selected={activeView}
+              onSelect={handleSidebarSelect}
+              reportsDropdownOpen={reportsOpen}
+              setReportsDropdownOpen={setReportsOpen}
+            />
+            <div className="mt-6 pt-4 border-t border-white/5">
+              <button
+                onClick={handleLogout}
+                className="w-full py-3 rounded-xl border-2 border-red-500/60 text-red-400 text-xs font-bold uppercase tracking-[0.15em] hover:bg-red-500/10 transition-colors cursor-pointer"
+              >
+                Terminate Session
+              </button>
+            </div>
+          </div>
+        </aside>
+
         {/* ── Main Content ── */}
-        <main className="flex-1 py-4 pl-4">
+        <main className="flex-1 py-4 md:pl-4 min-w-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeView}

@@ -194,27 +194,35 @@ export default function JobApplicationPage() {
 
   return (
     <>
-      <div className="pt-24" />
-      <section className="relative py-12 z-10 min-h-screen">
-        <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[140px]" />
-        <div className="absolute bottom-1/4 -right-40 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[140px]" />
-        
-        <div className="max-w-3xl mx-auto px-4 relative z-10">
-          {/* Header */}
+      <div className="pt-20" />
+
+      {/* ── Hero Section ── */}
+      <section className="relative z-10 py-16 text-center">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-slate-800/40 rounded-2xl p-8 text-center mb-6 border border-white/5"
+            transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25">
-                <span className="text-white font-bold text-xl">TK</span>
-              </div>
-              <span className="text-blue-400 font-bold text-lg">TK Security Service</span>
-            </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">Security Guard Job Application</h1>
-            <p className="text-slate-400 mt-2 text-sm">Please complete this form to apply for a security guard position.</p>
+            <p className="text-blue-400 text-xs font-bold uppercase tracking-[0.25em] mb-4">Job Application</p>
+            <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
+              Apply at <span className="text-blue-400">TK Security</span>
+            </h1>
+            <p className="text-slate-300 text-base md:text-lg font-semibold max-w-2xl mx-auto leading-relaxed">
+              <span className="font-bold text-white">TK Security Company</span> is looking for dedicated, trained security professionals to join our team and serve our clients across Southern California.
+            </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── Form Section ── */}
+      <section className="relative py-12 z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-white">Application Form</h2>
+            <p className="text-slate-400 text-sm mt-1">Please complete all required fields marked with *.</p>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
           

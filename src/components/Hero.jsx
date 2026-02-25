@@ -48,11 +48,11 @@ export default function Hero() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3">
+            <div className="flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-2">
               <button
                 type="button"
                 onClick={() => setShowQuoteForm(true)}
-                className="group flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 text-white font-semibold text-sm hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25"
+                className="group flex items-center gap-1.5 px-3 py-2 sm:px-6 sm:py-3 rounded-full bg-blue-600 text-white font-semibold text-[11px] sm:text-sm whitespace-nowrap hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/25"
               >
                 Get a Quote
                 <HiArrowRight className="group-hover:translate-x-1 transition-transform text-blue-400" />
@@ -67,7 +67,7 @@ export default function Hero() {
                     )}
               <Link to="/apply-job">
                 <motion.span
-                  className="group flex items-center gap-2 px-6 py-3 rounded-full glass text-slate-300 font-semibold text-sm hover:text-white transition-all"
+                  className="group flex items-center gap-1.5 px-3 py-2 sm:px-6 sm:py-3 rounded-full glass text-slate-300 font-semibold text-[11px] sm:text-sm whitespace-nowrap hover:text-white transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -76,11 +76,11 @@ export default function Hero() {
               </Link>
               <motion.a
                 href="tel:+18187075382"
-                className="group flex items-center gap-2 px-6 py-3 rounded-full glass text-slate-300 font-semibold text-sm hover:text-white transition-all"
+                className="group flex items-center gap-1.5 px-3 py-2 sm:px-6 sm:py-3 rounded-full glass text-slate-300 font-semibold text-[11px] sm:text-sm whitespace-nowrap hover:text-white transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <HiPhone className="text-blue-400" />
+                <HiPhone className="text-blue-400 shrink-0" />
                 24/7 Available
               </motion.a>
             </div>
